@@ -1,0 +1,7 @@
+<div class="row">
+  <app-deal class="col-md-4 mb-5" *ngFor="let deal of deals" [deal]="deal"></app-deal>
+</div>
+<div class="row mb-2 justify-content-center">
+    <button (click)="loadMore()" class="btn btn-primary col-4">Load More</button>
+</div>
+
