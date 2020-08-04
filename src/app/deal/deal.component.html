@@ -1,8 +1,14 @@
 <div>
+  <h2 appPointer (click)="open()">{{deal.title}}</h2>
   <a [href]="'https://www.cheapshark.com/redirect?dealID=' + deal.dealID">
-    <h2>{{deal.title}}</h2>
-    <img [src]="deal.thumb" alt="Game Cover">
+      <h3 class="text-danger">{{storeName}}</h3>
   </a>
+    <img appPointer (click)="open()" [src]="deal.thumb" alt="Game Cover">
+  <h5 class="mt-2">
+     <span [ngClass]="classes" class="text-white p-2">
+        Rating: {{deal.metacriticScore !== '0' ? deal.metacriticScore : 'Unknown'}} 
+    </span>
+  </h5>
   <h3>
     <span class="text-danger" style="text-decoration: line-through;">{{deal.normalPrice}}$</span>
     &#10143; 

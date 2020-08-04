@@ -1,7 +1,42 @@
 <div class="row">
-  <app-deal class="col-md-4 mb-5" *ngFor="let deal of deals" [deal]="deal"></app-deal>
+  <form #form="ngForm" (ngSubmit)="changeOrder()"  class="container-fluid">
+    <div class="form-group row justify-content-center">
+      <select [(ngModel)]="sortBy" class="form-control col-6 col-md-3" (change)="changeSorting($event)" name="sortBy" id="sortBy">
+        <option value="Deal Rating">Deal Rating</option>
+        <option value="Title">Title</option>
+        <option value="Savings">Savings</option>
+        <option value="Price">Price</option>
+        <option value="Metacritic">Metacritic</option>
+        <option value="Store">Store</option>
+        <option value="recent">Recent</option>
+        <option value="Reviews">Reviews</option>
+      </select>
+     <button type="submit" class="btn btn-primary col-2 col-md-1 ml-1">&#8693;</button>
+    </div>
+  </form>
+</div>
+<div class="row justify-content-center">
+  <app-spinner *ngIf="showLoader"></app-spinner>
+</div>
+<div class="row">
+  <app-deal class="col-md-4 mb-5"  
+    *ngFor="let deal of deals" 
+    [deal]="deal">
+  </app-deal>
 </div>
 <div class="row mb-2 justify-content-center">
     <button (click)="loadMore()" class="btn btn-primary col-4">Load More</button>
 </div>
+<div class="row justify-content-center mt-4">
+  
+</div>
+<!-- <div class="row mb-2 justify-content-center">
+  <form #emailForm="ngForm" (ngSubmit)="emailSubscribe()" class="col-6 mx-auto">
+    <div class="row justify-content-center">
+      <label for="email">Get the best deals delivered to your mailbox!</label>
+      <input [(ngModel)]="userEmail" class="col-md-8" required type="email" email name="email" id="email" placeholder="Enter your email here" >
+      <button type="submit" [disabled]="!emailForm.valid"  class="col-md-3 text-white btn bg-warning ml-1 mt-md-0 mt-2" (click)="loadMore()">Subscribe</button>
+    </div>
+  </form>
+</div> -->
 
