@@ -4,12 +4,14 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Deal } from '../models/deal.model';
 import { Store } from '../models/store.model';
 import {stores} from '../utils/stores-data';
+import { DealLookup } from '../models/deal-lookup.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DealsService {
 
+  dealOpened = new Subject<string>();
   storesInfo: Store[] = stores;
 
   constructor(private http: HttpClient) { 
@@ -18,6 +20,11 @@ export class DealsService {
 
   getStore(id: string): string {
     return this.storesInfo.find(store => store.storeID === id)!.storeName;
+  }
+
+  getDeal(dealID: string) {
+    return this.http.get<DealLookup>(`https://www.cheapshark.com/api/1.0/deals`,
+                        {params: new HttpParams().set('id', dealID)})
   }
 
     
