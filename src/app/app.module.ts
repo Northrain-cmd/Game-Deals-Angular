@@ -29,6 +29,7 @@ import { PointerDirective } from './shared/pointer.directive';
     NgbModalModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DealInfoComponent]
 })
 export class AppModule { }

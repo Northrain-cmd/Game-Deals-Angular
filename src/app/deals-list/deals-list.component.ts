@@ -59,11 +59,6 @@ export class DealsListComponent implements OnInit, OnDestroy {
       })
    }
 
-  //  emailSubscribe() {
-  //   console.log(this.userEmail);
-  //   this.dealsService.emailSubscribe(this.userEmail);
-  //  }
-
 
   ngOnInit(): void {
     this.showLoader = true;

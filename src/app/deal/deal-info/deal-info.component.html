@@ -1,12 +1,42 @@
-<div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
+<div class="modal-header" *ngIf="showLoader">
+  <app-spinner></app-spinner>
 </div>
-<div class="modal-body">
-  <p>Hello!</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-</div>
+<ng-container *ngIf="deal">
+  <div class="modal-header">
+    <h4 class="modal-title">{{deal.gameInfo.name}}
+      <span style="font-size: 0.8em;">({{releaseDate}})</span></h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img [src]="deal.gameInfo.thumb" alt="Cover image">
+    <a [href]="'https://www.cheapshark.com/redirect?dealID=' + this.dealID">
+      <h3 class="text-danger">{{this.storeName}}</h3>
+    </a>
+    <h5>Regular price: <span class="text-danger">{{deal.gameInfo.retailPrice}}$</span>
+      <br>
+      Now: <span class="text-success">{{deal.gameInfo.salePrice}}$</span>
+      <br>
+      <span *ngIf="deal.cheapestPrice.price">Cheapest price ever: <span
+          class="text-warning">{{deal.cheapestPrice.price}}$</span></span>
+    </h5>
+    <form *ngIf="!subscribed; else subscr" #emailForm="ngForm" (ngSubmit)="emailSubscribe()">
+      <label for="price">Set an alert to get the best deal on this game!</label>
+      <input [(ngModel)]="alertPrice" class="col-12 mb-2" required type="number" name="price" id="price"
+      placeholder="Price to wait for">
+      <div class="d-flex justify-content-center">
+        <input [(ngModel)]="userEmail" class="col-8" required type="email" email name="email" id="email"
+          placeholder="Email">
+        <button type="submit" [disabled]="!emailForm.valid"
+          class=" col-4 ml-1 text-white btn bg-warning">Subscribe</button>
+      </div>
+    </form>
+    <ng-template #subscr>
+      <h5> <span class="text-success">&#10003;</span> Subscribed for best deals!</h5>
+    </ng-template>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+</ng-container>

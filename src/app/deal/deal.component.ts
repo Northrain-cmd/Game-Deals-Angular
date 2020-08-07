@@ -29,8 +29,9 @@ export class DealComponent implements OnInit {
   }
 
   open() {
-    const modalRef = this.modalService.open(DealInfoComponent, {centered: true, size: 'lg'});
-    this.dealsService.dealOpened.next(this.deal.dealID);
+    const modalRef = this.modalService.open(DealInfoComponent, {centered: true, size: 'sm'});
+    modalRef.componentInstance.dealID = this.deal.dealID;
+    modalRef.componentInstance.storeName = this.storeName;
   }
 
 }
